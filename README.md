@@ -4,3 +4,5 @@ python finance api project
 Endpoints: 
     /revenue - gets revenue records
     /customers - gets customers records
+
+Refactored application into scalable architecture using service and routing layers
