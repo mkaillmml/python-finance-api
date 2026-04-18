@@ -24,3 +24,14 @@ def get_revenue_data():
     
     
     #return{"month": "Jan", "revenue": 120000}
+
+def get_revenue_trend():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""SELECT Month, SUM(Revenue)
+                        FROM Revenue
+                        GROUP BY Month
+                   """)
+    
+    return [{"month": r[0], "amount": r[1]} for r in cursor.fetchall()]

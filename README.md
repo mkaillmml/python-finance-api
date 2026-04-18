@@ -10,3 +10,5 @@ Refactored application into scalable architecture using service and routing laye
 Connected to SQL Server Database using pydoc
 
 Refacrored data layer to pull from Database
+
+Added new endpoint revenue-trend to find revenue by month aggregated
