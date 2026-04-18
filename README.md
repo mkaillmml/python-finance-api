@@ -11,4 +11,4 @@ Connected to SQL Server Database using pydoc
 
 Refacrored data layer to pull from Database
 
-Added new endpoint revenue-trend to find revenue by month aggregated
+Added new endpoint revenue-trend to find revenue by month aggregated - analytics endpoint
