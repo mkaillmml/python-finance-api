@@ -1,18 +1,25 @@
 from app.db import get_connection
+import json
 
 def get_revenue_data():
     conn = get_connection()
     cursor = conn.cursor()
     print(cursor)
 
-    cursor.execute("Select TOP 3 * from Revenue")
+    cursor.execute("Select * from Revenue")
 
-    print("Here1")
-    data = [row for row in cursor.fetchall()]
-    print("here2")
+    #data = [row for row in cursor.fetchall()]
+    rows = cursor.fetchall()
     conn.close()
-    print("here3")
-    print(data)
+    #print(data)
+
+    print(rows)
+
+    dt = json.dumps([list(i) for i in rows]) # Create JSON
+    print(dt)
+
+    return dt
+
 
     # data_as_dict = data.mappings().all()
     # print(data_as_dict)

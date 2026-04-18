@@ -1,10 +1,28 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.db import get_connection
 
 router = APIRouter()
 
 @router.get("/customers")
-def customers():
+def customers(region = None):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        query = "Select CustomerName From Customers"
+        if region:
+            query += f" Where Region = '{region}'"
+
+        cursor.execute(query)
+
+        return[row[0] for row in cursor.fetchall()]
+
+    except Exception as e:
+        raise HTTPException(status_code = 500, detail = str(e))
+
+
+    #2nd
+    """
     conn = get_connection()
 
     cursor = conn.cursor()
@@ -18,7 +36,8 @@ def customers():
     print(data_dict)
 
     return data_dict
-    
-    
+    """
+
+    #1st
     #return [{"id": 1, "name": "ABC Corp"}]
 
