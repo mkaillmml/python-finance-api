@@ -14,3 +14,5 @@ Refacrored data layer to pull from Database
 Added new endpoint revenue-trend to find revenue by month aggregated - analytics endpoint
 
 Added Customers route with path parameter and dynamic query
+
+Added Caching for performance

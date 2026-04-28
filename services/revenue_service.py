@@ -1,24 +1,44 @@
 from app.db import get_connection
 import json
 
+cache = {}
+
+def get_revenue_cached():
+    if "revenue" in cache:
+        return cache["revenue"]
+    
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("Select SUM(Revenue) from Revenue")
+
+    value = cursor.fetchone()[0]
+    result = {"revenue": value}
+
+    cache["revenue"] = result
+
+    return result
+
+    
+
 def get_revenue_data():
     conn = get_connection()
     cursor = conn.cursor()
     print(cursor)
 
-    cursor.execute("Select * from Revenue")
+    cursor.execute("Select * from Revenue FOR JSON PATH")
 
-    #data = [row for row in cursor.fetchall()]
-    rows = cursor.fetchall()
+    data = [row for row in cursor.fetchone()]
+    #rows = cursor.fetchall()
     conn.close()
     #print(data)
 
-    print(rows)
+    print(data)
+    #print(rows)
 
-    dt = json.dumps([list(i) for i in rows]) # Create JSON
-    print(dt)
+    #dt = json.dumps([list(i) for i in rows]) # Create JSON
+    #print(dt)
 
-    return dt
+    return data
 
 
     # data_as_dict = data.mappings().all()
